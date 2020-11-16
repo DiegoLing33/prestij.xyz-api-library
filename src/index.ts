@@ -14,9 +14,9 @@ import {CreateRequest, GetAll, LimitLoadable, PerPageHandler} from "./Core/Core"
 import {GetGuild, GetGuildObject, GuildInfo} from "./Guild/Guild";
 import {StoreDataValue} from "./StoreData/StoreData";
 import {
-	CharacterActiveSpec, CharacterClass, CharacterEquipment,
+	CharacterActiveSpecRaw, CharacterClassRaw, CharacterEquipmentRaw,
 	CharacterEquipmentType,
-	CharacterRace, CharacterRole, GetCharacters, SetCharacterMetaText
+	CharacterRaceRaw, CharacterRoleRaw, GetCharacters, SetCharacterMetaText
 } from "./Characters/Characters";
 
 export {
@@ -24,11 +24,11 @@ export {
 	GuildInfo,
 
 	CharacterEquipmentType,
-	CharacterEquipment,
-	CharacterRole,
-	CharacterRace,
-	CharacterClass,
-	CharacterActiveSpec,
+	CharacterEquipmentRaw,
+	CharacterRoleRaw,
+	CharacterRaceRaw,
+	CharacterClassRaw,
+	CharacterActiveSpecRaw,
 
 	LimitLoadable,
 	PerPageHandler,
