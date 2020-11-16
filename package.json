@@ -1,0 +1,16 @@
+{
+  "name": "prestij.xyz-api",
+  "version": "1.0.3",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Yakov V. Ling",
+    "url": "http://ling.black"
+  },
+  "scripts": {
+    "buid": "tsc"
+  },
+  "dependencies": {
+    "typescript": "^4.0.5"
+  }
+}
