@@ -13,11 +13,8 @@
 import {CreateRequest, GetAll, LimitLoadable, PerPageHandler} from "./Core/Core";
 import {GetGuild, GetGuildObject, GuildInfo} from "./Guild/Guild";
 import {StoreDataValue} from "./StoreData/StoreData";
-import {
-	CharacterActiveSpecRaw, CharacterClassRaw, CharacterEquipmentRaw,
-	CharacterEquipmentType,
-	CharacterRaceRaw, CharacterRoleRaw, GetCharacters, SetCharacterMetaText
-} from "./Characters/Characters";
+import { CharacterEquipmentType, CharacterEquipmentRaw, CharacterRoleRaw, CharacterClassRaw, CharacterRaceRaw, CharacterActiveSpecRaw } from "./Characters/CharacterRaw";
+import {GetCharacters, SetCharacterMetaText} from "./Characters/Characters";
 
 export {
 	StoreDataValue,
