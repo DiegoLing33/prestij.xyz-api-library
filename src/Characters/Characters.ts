@@ -19,9 +19,10 @@ import {
 	CharacterRaw,
 	CharacterRoleRaw
 } from "./CharacterRaw";
-import {Raw} from "../Core/Raw";
+import {ConfirmRaw, Raw, WIDRaw, WIDWithNameRaw} from "../Core/Raw";
+import {CharacterEquipment} from "./CharacterEquipment";
 
-export enum CharacterSpecType{
+export enum CharacterSpecType {
 	NONE,
 	TANK,
 	HEALER,
@@ -34,18 +35,18 @@ export type CharacterGender = 'FEMALE' | 'MALE';
 /**
  * Character guild rank
  */
-export class CharacterGuildRank extends Raw<CharacterRoleRaw>{
+export class CharacterGuildRank extends Raw<CharacterRoleRaw> {
 	/**
 	 * Returns the title
 	 */
-	public getTitle(): string{
+	public getTitle(): string {
 		return this.getRaw().title
 	}
 
 	/**
 	 * Returns the rank index
 	 */
-	public getIndex(): number{
+	public getIndex(): number {
 		return this.getRaw().role_index;
 	}
 }
@@ -53,18 +54,11 @@ export class CharacterGuildRank extends Raw<CharacterRoleRaw>{
 /**
  * The character race
  */
-export class CharacterRace extends Raw<CharacterRaceRaw>{
-	/**
-	 * The character race wow id
-	 */
-	public getWID(){
-		return this.getRaw().wow_id;
-	}
-
+export class CharacterRace extends WIDRaw<CharacterRaceRaw> {
 	/**
 	 * The character race title
 	 */
-	public getTitle(): string{
+	public getTitle(): string {
 		return this.getRaw().title;
 	}
 }
@@ -72,18 +66,11 @@ export class CharacterRace extends Raw<CharacterRaceRaw>{
 /**
  * The character race
  */
-export class CharacterClass extends Raw<CharacterClassRaw>{
-	/**
-	 * The character class wow id
-	 */
-	public getWID(){
-		return this.getRaw().wow_id;
-	}
-
+export class CharacterClass extends WIDRaw<CharacterClassRaw> {
 	/**
 	 * The character class title
 	 */
-	public getTitle(): string{
+	public getTitle(): string {
 		return this.getRaw().title;
 	}
 }
@@ -92,22 +79,15 @@ export class CharacterClass extends Raw<CharacterClassRaw>{
 /**
  * The character spec
  */
-export class CharacterSpec extends Raw<CharacterActiveSpecRaw>{
-	/**
-	 * The character spec wow id
-	 */
-	public getWID(){
-		return this.getRaw().wow_id;
-	}
-
+export class CharacterSpec extends WIDRaw<CharacterActiveSpecRaw> {
 	/**
 	 * The character spec title
 	 */
-	public getTitle(): string{
+	public getTitle(): string {
 		return this.getRaw().title;
 	}
 
-	public getType(): CharacterSpecType{
+	public getType(): CharacterSpecType {
 		return this.getRaw().type;
 	}
 }
@@ -116,55 +96,106 @@ export class CharacterSpec extends Raw<CharacterActiveSpecRaw>{
 /**
  * The character
  */
-export class Character extends Raw<CharacterRaw>{
-	public readonly level: number;
-	public readonly faction: string;
-	public readonly gear: number;
+export class Character extends WIDWithNameRaw<CharacterRaw> {
 
-	public readonly guild_role: number;
-	public readonly meta_text: string;
+	protected readonly __guildRank!: CharacterGuildRank;
+	protected readonly __spec!: CharacterSpec;
+	protected readonly __race!: CharacterRace;
+	protected readonly __class!: CharacterClass;
+	protected readonly __equipment!: CharacterEquipment;
 
-	public readonly role: CharacterRoleRaw;
-	public readonly race: CharacterRaceRaw;
-	public readonly class: CharacterClassRaw;
-	public readonly spec: CharacterClassRaw;
+	constructor(raw: CharacterRaw) {
+		super(raw);
+		this.__guildRank = new CharacterGuildRank(this.getRaw().role);
+		this.__spec = new CharacterSpec(this.getRaw().character_spec);
+		this.__race = new CharacterRace(this.getRaw().character_race);
+		this.__class = new CharacterClass(this.getRaw().character_class);
 
-	public readonly equipment: CharacterEquipmentItem[];
-
-	/**
-	 * Returns the wow id
-	 */
-	public getWID(): number{
-		return this.getRaw().wow_id;
-	}
-
-	/**
-	 * Returns the name
-	 */
-	public getName(): string{
-		return this.getRaw().name;
+		this.__equipment = new CharacterEquipment(this.getRaw().equipment, this.getGear());
 	}
 
 	/**
 	 * Returns the gender
 	 */
-	public getGender(): CharacterGender{
+	public getGender(): CharacterGender {
 		return this.getRaw().gender as CharacterGender;
 	}
 
 	/**
 	 * Returns the level
 	 */
-	public getLevel(): number{
+	public getLevel(): number {
 		return this.getRaw().level;
+	}
+
+	/**
+	 * Returns the faction
+	 */
+	public getFaction(): string {
+		return this.getRaw().faction;
 	}
 
 	/**
 	 * Returns the character equipment gear
 	 */
-	public getGear(): number{
+	public getGear(): number {
 		return this.getRaw().gear;
 	}
+
+	/**
+	 * Creates the object
+	 */
+	public getGuildRank(): CharacterGuildRank {
+		return new CharacterGuildRank(this.getRaw().role);
+	}
+
+	/**
+	 * Returns the race
+	 */
+	public getRace(): CharacterRace {
+		return this.__race;
+	}
+
+	/**
+	 * Returns the class
+	 */
+	public getClass(): CharacterClass {
+		return this.__class;
+	}
+
+	/**
+	 * Returns the active spec object
+	 */
+	public getActiveSpec(): CharacterSpec {
+		return this.__spec;
+	}
+
+	/**
+	 * Returns the equipment
+	 */
+	public getEquipment(): CharacterEquipment {
+		return this.__equipment;
+	}
+
+	/**
+	 * Returns the guild role
+	 *
+	 * It depends which role player selected to guild: TANK, HEALER, MILLIE, RANGE
+	 */
+	public getGuildRole(): CharacterSpecType {
+		return this.getRaw().guild_role;
+	}
+
+	/**
+	 * Returns the meta text
+	 */
+	public getMetaText(): string {
+		return this.getRaw().meta_text;
+	}
+}
+
+export async function GetCharacter(name: string): Promise<Character> {
+	return new Character(await CreateRequest('characters/' + name));
 }
 
 /**
@@ -172,11 +203,15 @@ export class Character extends Raw<CharacterRaw>{
  * @param props
  * @constructor
  */
-export async function GetCharacters(props: { offset?: number, limit?: number } = {}): Promise<LimitResponse<CharacterRaw>> {
-    const offset = props.offset || 0;
-    const limit = props.limit || 100;
+export async function GetCharacters(props: { offset?: number, limit?: number } = {}): Promise<LimitResponse<Character>> {
+	const offset = props.offset || 0;
+	const limit = props.limit || 100;
 
-    return CreateRequest('characters/list', {offset, limit});
+	// Filter
+	const data = await CreateRequest<LimitResponse<CharacterRaw>>('characters/list', {offset, limit});
+	const items = data.response.items.map(v => ConfirmRaw(v, Character));
+
+	return {request: data.request, response: {...data.response, items}};
 }
 
 /**
@@ -186,6 +221,6 @@ export async function GetCharacters(props: { offset?: number, limit?: number } =
  * @constructor
  */
 export async function SetCharacterMetaText(name: string, text: string): Promise<CharacterRaw> {
-    const __name = name.substr(0, 1).toUpperCase() + name.substr(1).toLocaleLowerCase();
-    return CreateRequest('characters/meta/' + __name, {text}, 'PUT');
+	const __name = name.substr(0, 1).toUpperCase() + name.substr(1).toLocaleLowerCase();
+	return CreateRequest('characters/meta/' + __name, {text}, 'PUT');
 }

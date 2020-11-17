@@ -62,7 +62,7 @@ export interface CharacterRaw extends CharacterCoreRaw{
     role: CharacterRoleRaw;
     character_race: CharacterRaceRaw;
     character_class: CharacterClassRaw;
-    character_spec: CharacterClassRaw;
+    character_spec: CharacterActiveSpecRaw;
 
     realm_id: number;
     guild_id: number;
