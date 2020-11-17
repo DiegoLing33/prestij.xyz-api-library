@@ -1,6 +1,6 @@
 {
   "name": "prestij.xyz-api",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "main": "dist/index.js",
   "license": "MIT",
   "author": {
@@ -8,9 +8,16 @@
     "url": "http://ling.black"
   },
   "scripts": {
-    "buid": "tsc"
+    "build": "tsc"
   },
   "dependencies": {
+    "node-fetch": "^2.6.1",
     "typescript": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.15",
+    "@types/node-fetch": "^2.5.7",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4"
   }
 }
