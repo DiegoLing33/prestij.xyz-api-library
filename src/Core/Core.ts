@@ -32,10 +32,11 @@ export interface LimitResponse<T> {
  * @constructor
  */
 export function CreateRequest<ResponseType>(path: string, data: any = {}, method: string = 'GET'): Promise<ResponseType> {
+	const rePath = encodeURIComponent(path);
 	const args = method === 'GET' ? new URLSearchParams(data) : '';
 	return new Promise(async (resolve, reject) => {
 		try {
-			const ft = await fetch(CoreAPIUrl + path + '?' + args, {
+			const ft = await fetch(CoreAPIUrl + rePath + '?' + args, {
 				method,
 				body: method !== 'GET' ? JSON.stringify(data) : undefined,
 			});
@@ -61,10 +62,10 @@ export interface PerPageHandler {
  * @param closure
  * @param perPage
  * @param tag
+ * @param limit
  * @constructor
  */
-export async function GetAll<T>(closure: LimitLoadable<T>, perPage?: PerPageHandler, tag?: string): Promise<T[]> {
-	const limit = 100;
+export async function GetAll<T>(closure: LimitLoadable<T>, perPage?: PerPageHandler, tag?: string, limit: number = 100): Promise<T[]> {
 	let i = 0;
 
 	if (perPage) perPage(0, 0, tag);
