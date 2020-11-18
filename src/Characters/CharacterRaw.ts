@@ -59,6 +59,8 @@ export interface CharacterRaw extends CharacterCoreRaw{
     guild_role: number;
     meta_text: string;
 
+    activity: number;
+
     role: CharacterRoleRaw;
     character_race: CharacterRaceRaw;
     character_class: CharacterClassRaw;

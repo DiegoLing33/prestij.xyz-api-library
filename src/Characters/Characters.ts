@@ -192,6 +192,13 @@ export class Character extends WIDWithNameRaw<CharacterRaw> {
 	public getMetaText(): string {
 		return this.getRaw().meta_text;
 	}
+
+	/**
+	 * Returns the player activity points
+	 */
+	public getActivityPoints(): number {
+		return this.getRaw().activity;
+	}
 }
 
 export async function GetCharacter(name: string): Promise<Character> {
@@ -208,7 +215,7 @@ export async function GetCharacters(props: { offset?: number, limit?: number } =
 	const limit = props.limit || 100;
 
 	// Filter
-	const data = await CreateRequest<LimitResponse<CharacterRaw>>('characters/list', {offset, limit});
+	const data = await CreateRequest<LimitResponse<CharacterRaw>>('characters/', {offset, limit});
 	const items = data.response.items.map(v => ConfirmRaw(v, Character));
 
 	return {request: data.request, response: {...data.response, items}};
