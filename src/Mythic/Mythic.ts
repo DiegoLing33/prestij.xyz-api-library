@@ -11,7 +11,7 @@
  */
 
 
-import {CharacterSpec, CharacterSpecType} from "../Characters/Characters";
+import {CharacterSpec} from "../Characters/Characters";
 import {ConfirmRaw, ConfirmRaws, NameRaw, WIDWithNameRaw} from "../Core/Raw";
 import {MythicAffixRaw, MythicMemberRaw, MythicRaw} from "./MythicRaw";
 import {CreateRequest, LimitResponse} from "../Core/Core";
@@ -32,6 +32,13 @@ export class MythicMember extends WIDWithNameRaw<MythicMemberRaw> {
 	 */
 	public getMythicHash(): string {
 		return this.getRaw().mythic_hash;
+	}
+
+	/**
+	 * Returns true, if player from guild
+	 */
+	public isFromGuild(): boolean{
+		return this.getRaw().from_guild;
 	}
 }
 
@@ -59,6 +66,13 @@ export class Mythic extends NameRaw<MythicRaw> {
 	 */
 	public getMythicHash(): string {
 		return this.getRaw().mythic_hash;
+	}
+
+	/**
+	 * Returns the count of guild players in this race
+	 */
+	public getGuildPlayers(): number{
+		return this.getRaw().guild_race;
 	}
 
 
@@ -125,6 +139,20 @@ export class Mythic extends NameRaw<MythicRaw> {
 	public isDone(): boolean {
 		return this.getRaw().done_in_time;
 	}
+
+	/**
+	 * Returns true, if it was a guild race
+	 */
+	public isGuildRace(): boolean{
+		return this.getRaw().guild_race === 5;
+	}
+
+	/**
+	 * Returns the level of the keystone
+	 */
+	public getLevel(): number{
+		return this.getRaw().level;
+	}
 }
 
 /**
@@ -137,8 +165,17 @@ export async function GetMythic(props: { offset?: number, limit?: number } = {})
 	const limit = props.limit || 100;
 
 	// Filter
-	const data = await CreateRequest<LimitResponse<MythicRaw>>('mythic/list', {offset, limit});
+	const data = await CreateRequest<LimitResponse<MythicRaw>>('mythic', {offset, limit});
 	const items = data.response.items.map(v => ConfirmRaw(v, Mythic));
 
 	return {request: data.request, response: {...data.response, items}};
+}
+
+/**
+ * Returns the mythic by hash
+ * @param name
+ * @constructor
+ */
+export async function GetMythicByHash(name: string): Promise<Mythic> {
+	return new Mythic(await CreateRequest('mythic/' + name));
 }
