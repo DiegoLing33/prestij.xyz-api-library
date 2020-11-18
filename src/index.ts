@@ -18,6 +18,7 @@ import {GetCharacter, GetCharacters, SetCharacterMetaText} from "./Characters/Ch
 import {CharacterEquipment, CharacterEquipmentItem } from "./Characters/CharacterEquipment";
 import {ConfirmRaw, ConfirmRaws } from "./Core/Raw";
 import {GetMythic, GetMythicByHash, Mythic, MythicAffix, MythicMember} from "./Mythic/Mythic";
+import {GetActivity} from "./Guild/Activity";
 
 export {
 	StoreDataValue,
@@ -57,4 +58,6 @@ export const GuildAPI = {
 
 	GetMythic,
 	GetMythicByHash,
+
+	GetActivity,
 };
