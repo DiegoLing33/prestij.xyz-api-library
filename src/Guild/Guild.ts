@@ -48,5 +48,5 @@ export function GetGuild(): Promise<GuildInfo> {
  * @constructor
  */
 export async function GetGuildObject(): Promise<GuildInfoObject> {
-	return (await GetGuild()).reduce<any>((obj, o) => obj[o.field] = o.value, {});
+	return CreateRequest<GuildInfoObject>("guild/object");
 }
