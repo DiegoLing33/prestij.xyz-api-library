@@ -91,5 +91,5 @@ export class Activity extends Raw<ActivityRaw> {
  * @constructor
  */
 export async function GetActivity(): Promise<Activity> {
-	return CreateRequest<Activity>("guild/activity");
+	return ConfirmRaw(await CreateRequest<ActivityRaw>("guild/activity"), Activity);
 }

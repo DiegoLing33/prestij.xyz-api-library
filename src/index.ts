@@ -13,12 +13,23 @@
 import {CreateRequest, GetAll, LimitLoadable, PerPageHandler} from "./Core/Core";
 import {GetGuild, GetGuildObject, GuildInfo} from "./Guild/Guild";
 import {StoreDataValue} from "./StoreData/StoreData";
-import { CharacterEquipmentType, CharacterEquipmentRaw, CharacterRoleRaw, CharacterClassRaw, CharacterRaceRaw, CharacterActiveSpecRaw } from "./Characters/CharacterRaw";
+import {
+	CharacterEquipmentType,
+	CharacterEquipmentRaw,
+	CharacterRoleRaw,
+	CharacterClassRaw,
+	CharacterRaceRaw,
+	CharacterActiveSpecRaw
+} from "./Characters/CharacterRaw";
 import {GetCharacter, GetCharacters, SetCharacterMetaText} from "./Characters/Characters";
-import {CharacterEquipment, CharacterEquipmentItem } from "./Characters/CharacterEquipment";
-import {ConfirmRaw, ConfirmRaws } from "./Core/Raw";
+import {CharacterEquipment, CharacterEquipmentItem} from "./Characters/CharacterEquipment";
+import {ConfirmRaw, ConfirmRaws} from "./Core/Raw";
 import {GetMythic, GetMythicByHash, Mythic, MythicAffix, MythicMember} from "./Mythic/Mythic";
 import {GetActivity} from "./Guild/Activity";
+import WFTUtils from "./Utils/WFTUtils";
+import WFTClass from "./Utils/WFTClass";
+import WFTRace from "./Utils/WFTRace";
+import WFTSpecialization from "./Utils/WFTSpecialization";
 
 export {
 	StoreDataValue,
@@ -43,6 +54,11 @@ export {
 
 	ConfirmRaw,
 	ConfirmRaws,
+
+	WFTUtils,
+	WFTClass,
+	WFTRace,
+	WFTSpecialization,
 }
 
 export const GuildAPI = {
