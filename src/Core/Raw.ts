@@ -24,12 +24,12 @@ export class Raw<T> {
  * .getWID();
  */
 export class WIDRaw<T extends { wow_id: number }> extends Raw<T> {
-    /**
-     * Returns the wow id
-     */
-    public getWID(): number {
-        return this.getRaw().wow_id;
-    }
+	/**
+	 * Returns the wow id
+	 */
+	public getWID(): number {
+		return this.getRaw().wow_id;
+	}
 }
 
 /**
@@ -38,12 +38,12 @@ export class WIDRaw<T extends { wow_id: number }> extends Raw<T> {
  * .getName();
  */
 export class NameRaw<T extends { name: string }> extends Raw<T> {
-    /**
-     * Returns the name
-     */
-    public getName(): string {
-        return this.getRaw().name;
-    }
+	/**
+	 * Returns the name
+	 */
+	public getName(): string {
+		return this.getRaw().name;
+	}
 }
 
 /**
@@ -54,14 +54,22 @@ export class NameRaw<T extends { name: string }> extends Raw<T> {
  *
  */
 export class WIDWithNameRaw<T extends { wow_id: number, name: string }> extends Raw<T> {
-    /**
-     * Returns the name
-     */
-    public getName(): string {
-        return this.getRaw().name;
-    }
+	/**
+	 * Returns the name
+	 */
+	public getName(): string {
+		return this.getRaw().name;
+	}
 }
 
+export class RawWithId<T extends { id: number }> extends Raw<T> {
+	/**
+	 * Returns the identifier
+	 */
+	public getId(): number {
+		return this.getRaw().id;
+	}
+}
 
 export function ConfirmRaw<T, R>(raw: T, to: new (props: T) => R): R {
 	return new to(raw);

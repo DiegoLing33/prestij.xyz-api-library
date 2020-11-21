@@ -30,6 +30,17 @@ import WFTUtils from "./Utils/WFTUtils";
 import WFTClass from "./Utils/WFTClass";
 import WFTRace from "./Utils/WFTRace";
 import WFTSpecialization from "./Utils/WFTSpecialization";
+import {AddUser} from "./Users/BlizzardUser";
+import {
+	AddCategory,
+	AddComment,
+	DeleteComment,
+	GetCategories, GetPost,
+	GetPosts,
+	GetPostsByCategory,
+	LikePost,
+	UnlikePost
+} from "./Post/Post";
 
 export {
 	StoreDataValue,
@@ -76,4 +87,21 @@ export const GuildAPI = {
 	GetMythicByHash,
 
 	GetActivity,
+
+	AddUser,
+
+	Posts: {
+		AddCategory,
+		GetCategories,
+
+		GetPosts,
+		GetPost,
+		GetPostsByCategory,
+
+		LikePost,
+		UnlikePost,
+
+		AddComment,
+		DeleteComment,
+	}
 };

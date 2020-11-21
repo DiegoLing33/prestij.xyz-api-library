@@ -81,3 +81,5 @@ export async function GetAll<T>(closure: LimitLoadable<T>, perPage?: PerPageHand
 	}
 	return loaded;
 }
+
+export type WithToken<T> = Partial<T> & { token?: string };

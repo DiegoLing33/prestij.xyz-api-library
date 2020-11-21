@@ -37,8 +37,15 @@ export class MythicMember extends WIDWithNameRaw<MythicMemberRaw> {
 	/**
 	 * Returns true, if player from guild
 	 */
-	public isFromGuild(): boolean{
+	public isFromGuild(): boolean {
 		return this.getRaw().from_guild;
+	}
+
+	/**
+	 * Returns the active spec
+	 */
+	public getActiveSpec(): CharacterSpec {
+		return this.__spec;
 	}
 }
 
@@ -71,7 +78,7 @@ export class Mythic extends NameRaw<MythicRaw> {
 	/**
 	 * Returns the count of guild players in this race
 	 */
-	public getGuildPlayers(): number{
+	public getGuildPlayers(): number {
 		return this.getRaw().guild_race;
 	}
 
@@ -143,14 +150,14 @@ export class Mythic extends NameRaw<MythicRaw> {
 	/**
 	 * Returns true, if it was a guild race
 	 */
-	public isGuildRace(): boolean{
+	public isGuildRace(): boolean {
 		return this.getRaw().guild_race === 5;
 	}
 
 	/**
 	 * Returns the level of the keystone
 	 */
-	public getLevel(): number{
+	public getLevel(): number {
 		return this.getRaw().level;
 	}
 }
