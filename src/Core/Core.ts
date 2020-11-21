@@ -37,6 +37,7 @@ export function CreateRequest<ResponseType>(path: string, data: any = {}, method
 	return new Promise(async (resolve, reject) => {
 		try {
 			const ft = await fetch(CoreAPIUrl + rePath + '?' + args, {
+				mode: 'no-cors',
 				method,
 				body: method !== 'GET' ? JSON.stringify(data) : undefined,
 			});
