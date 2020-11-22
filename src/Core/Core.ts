@@ -32,11 +32,10 @@ export interface LimitResponse<T> {
  * @constructor
  */
 export function CreateRequest<ResponseType>(path: string, data: any = {}, method: string = 'GET'): Promise<ResponseType> {
-	const rePath = encodeURIComponent(path);
 	const args = method === 'GET' ? new URLSearchParams(data) : '';
 	return new Promise(async (resolve, reject) => {
 		try {
-			const ft = await fetch(CoreAPIUrl + rePath + '?' + args, {
+			const ft = await fetch(CoreAPIUrl + path + '?' + args, {
 				method,
 				body: method !== 'GET' ? JSON.stringify(data) : undefined,
 			});

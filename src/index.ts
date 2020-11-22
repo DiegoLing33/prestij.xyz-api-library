@@ -33,14 +33,15 @@ import WFTSpecialization from "./Utils/WFTSpecialization";
 import {AddUser} from "./Users/BlizzardUser";
 import {
 	AddCategory,
-	AddComment,
-	DeleteComment,
+	AddComment, AddPost,
+	DeleteComment, DeletePost, EditPost,
 	GetCategories, GetPost,
 	GetPosts,
 	GetPostsByCategory,
 	LikePost,
 	UnlikePost
 } from "./Post/Post";
+import {Upload} from "./Files/Files";
 
 export {
 	StoreDataValue,
@@ -103,5 +104,13 @@ export const GuildAPI = {
 
 		AddComment,
 		DeleteComment,
+
+		AddPost,
+		EditPost,
+		DeletePost,
+	},
+
+	Files: {
+		Upload
 	}
 };

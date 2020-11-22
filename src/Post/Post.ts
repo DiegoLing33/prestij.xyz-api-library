@@ -233,12 +233,33 @@ export class Post extends RawWithId<PostRaw> {
 	}
 }
 
+export async function AddPost(data: PostRawCreate): Promise<Post> {
+	return ConfirmRaw(
+		await CreateRequest<PostRaw>("posts", data, "POST"),
+		Post,
+	)
+}
+
+export async function EditPost(postId: number, data: PostRawCreate): Promise<Post> {
+	return ConfirmRaw(
+		await CreateRequest<PostRaw>("posts/" + postId, data, "POST"),
+		Post,
+	)
+}
+
+export async function DeletePost(postId: number, data: PostRawCreate): Promise<Post> {
+	return ConfirmRaw(
+		await CreateRequest<PostRaw>("posts/" + postId, data, "DELETE"),
+		Post,
+	)
+}
+
 /**
  * Returns the post
  * @param postId
  * @constructor
  */
-export async function GetPost(postId: number): Promise<Post>{
+export async function GetPost(postId: number): Promise<Post> {
 	return ConfirmRaw(
 		await CreateRequest<PostRaw>("posts/" + postId),
 		Post
