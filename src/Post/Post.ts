@@ -240,18 +240,12 @@ export async function AddPost(data: PostRawCreate): Promise<Post> {
 	)
 }
 
-export async function EditPost(postId: number, data: PostRawCreate): Promise<Post> {
-	return ConfirmRaw(
-		await CreateRequest<PostRaw>("posts/" + postId, data, "POST"),
-		Post,
-	)
+export async function EditPost(postId: number, data: PostRawCreate): Promise<boolean> {
+	return await CreateRequest("posts/" + postId, data, "POST");
 }
 
-export async function DeletePost(postId: number, data: PostRawCreate): Promise<Post> {
-	return ConfirmRaw(
-		await CreateRequest<PostRaw>("posts/" + postId, data, "DELETE"),
-		Post,
-	)
+export async function DeletePost(postId: number, data: PostRawCreate): Promise<boolean> {
+	return await CreateRequest("posts/" + postId, data, "DELETE");
 }
 
 /**
