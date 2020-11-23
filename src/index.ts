@@ -30,7 +30,7 @@ import WFTUtils from "./Utils/WFTUtils";
 import WFTClass from "./Utils/WFTClass";
 import WFTRace from "./Utils/WFTRace";
 import WFTSpecialization from "./Utils/WFTSpecialization";
-import {AddUser} from "./Users/BlizzardUser";
+import {AddUser, GetUser} from "./Users/BlizzardUser";
 import {
 	AddCategory,
 	AddComment, AddPost,
@@ -90,6 +90,7 @@ export const GuildAPI = {
 	GetActivity,
 
 	AddUser,
+	GetUser,
 
 	Posts: {
 		AddCategory,

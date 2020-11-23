@@ -57,3 +57,14 @@ export async function AddUser(data: BlizzardUserRawCreate): Promise<BlizzardUser
 		BlizzardUser
 	);
 }
+
+/**
+ * Adds the user
+ * @constructor
+ */
+export async function GetUser(blizzard_id: number): Promise<BlizzardUser> {
+	return ConfirmRaw(
+		await CreateRequest<BlizzardUserRaw>("users/" + blizzard_id),
+		BlizzardUser
+	);
+}

@@ -40,6 +40,9 @@ export function CreateRequest<ResponseType>(path: string, data: any = {}, method
 				body: method !== 'GET' ? JSON.stringify(data) : undefined,
 			});
 			const json = await ft.json();
+			if (json.detail) {
+				throw new Error(json.detail);
+			}
 			resolve(json);
 		} catch (e) {
 			reject(e);
