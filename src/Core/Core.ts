@@ -41,7 +41,7 @@ export function CreateRequest<ResponseType>(path: string, data: any = {}, method
 			});
 			const json = await ft.json();
 			if (json.detail) {
-				throw new Error(json.detail);
+				throw json.detail;
 			}
 			resolve(json);
 		} catch (e) {

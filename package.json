@@ -1,6 +1,6 @@
 {
   "name": "prestij.xyz-api",
-  "version": "1.0.17",
+  "version": "1.0.19",
   "main": "dist/index.js",
   "license": "MIT",
   "author": {
@@ -8,7 +8,8 @@
     "url": "http://ling.black"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "tsc"
   },
   "files": [
     "dist"

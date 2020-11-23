@@ -292,3 +292,25 @@ export async function GetPostsByCategory(categoryId: number, props: { offset?: n
 
 	return {request: data.request, response: {...data.response, items}};
 }
+
+/**
+ * Returns the posts by category
+ * @param blizzard_id
+ * @param props
+ * @constructor
+ */
+export async function GetPostsByBlizzardId(blizzard_id: number, props: {
+	offset?: number,
+	limit?: number,
+	token?: string,
+} = {}): Promise<LimitResponse<Post>> {
+	const offset = props.offset || 0;
+	const limit = props.limit || 100;
+	const token = props.token || '';
+
+	// Filter
+	const data = await CreateRequest<LimitResponse<PostRaw>>('posts/user/' + blizzard_id, {offset, limit, token});
+	const items = data.response.items.map(v => ConfirmRaw(v, Post));
+
+	return {request: data.request, response: {...data.response, items}};
+}

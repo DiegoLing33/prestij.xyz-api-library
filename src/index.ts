@@ -36,12 +36,13 @@ import {
 	AddComment, AddPost,
 	DeleteComment, DeletePost, EditPost,
 	GetCategories, GetPost,
-	GetPosts,
+	GetPosts, GetPostsByBlizzardId,
 	GetPostsByCategory,
 	LikePost,
 	UnlikePost
 } from "./Post/Post";
 import {Upload} from "./Files/Files";
+import {GetWAccounts} from "./WAccount/WAccount";
 
 export {
 	StoreDataValue,
@@ -91,6 +92,7 @@ export const GuildAPI = {
 
 	AddUser,
 	GetUser,
+	GetWAccounts,
 
 	Posts: {
 		AddCategory,
@@ -99,6 +101,7 @@ export const GuildAPI = {
 		GetPosts,
 		GetPost,
 		GetPostsByCategory,
+		GetPostsByBlizzardId,
 
 		LikePost,
 		UnlikePost,
